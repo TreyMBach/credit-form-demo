@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
@@ -12,6 +13,12 @@ const db = mysql.createConnection({
     password: 'root',
     database: 'creditsystem'
 });
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
 
 app.post('/create', (req, res) => {
     const name = req.body.name
